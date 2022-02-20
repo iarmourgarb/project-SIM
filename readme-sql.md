@@ -16,9 +16,10 @@ INSERT INTO users (username, password)
 ```sql
 -- ratings table (primary key: id)
 CREATE TABLE ratings (id int(1) PRIMARY KEY AUTO_INCREMENT,
-    username varchar(255) NOT NULL FOREIGN KEY REFERENCES users(username),
+    username varchar(255) NOT NULL,
     song varchar(255) NOT NULL,
-    rating int(1));
+    rating int(1),
+    FOREIGN KEY (username) REFERENCES users(username));
 
 INSERT INTO ratings (username, song, rating)
     VALUES ("Amelia-Earhart", "Freeway", "3");
