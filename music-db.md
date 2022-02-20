@@ -16,7 +16,7 @@ INSERT INTO users (username, password)
 ```sql
 -- ratings table (primary key: id)
 CREATE TABLE ratings (id int(1) PRIMARY KEY AUTO_INCREMENT,
-    username varchar(255) NOT NULL,
+    username varchar(255) NOT NULL FOREIGN KEY REFERENCES users(username),
     song varchar(255) NOT NULL,
     rating int(1));
 
