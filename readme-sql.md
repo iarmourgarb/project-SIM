@@ -37,8 +37,11 @@ CREATE TABLE artists (
     song varchar(255) NOT NULL PRIMARY KEY,
     artist varchar(255) NOT NULL);
 
-INSERT INTO artists (first_name, last_name, email, phone, birthdate)
-    VALUES ("Peter", "Rabbit", "peter@rabbit.com", "555-6666", "2002-06-24");
-INSERT INTO artists (first_name, last_name, email, phone, birthdate)
-    VALUES ("Alice", "Wonderland", "alice@wonderland.com", "555-4444", "2002-07-04");
+INSERT INTO artists (song, artist)
+    VALUES ("Freeway", "Aimee Mann");
+INSERT INTO artists (song, artist)
+    VALUES ("Days of Wine and Roses", "Bill Evans");
+INSERT INTO artists (song, artist)
+    VALUES("These Walls", "Kendrick Lamar");
+
 ```
