@@ -26,7 +26,7 @@ CREATE TABLE students (id INTEGER PRIMARY KEY AUTO_INCREMENT,
     birthdate TEXT);
 
 INSERT INTO students (first_name, last_name, email, phone, birthdate)
-    VALUES ("Peter", "Rabbit", "peter@rabbit.com", "555-6666", "2002-06-24");
+    VALUES ("Magda", "Rabbit", "peter@rabbit.com", "555-6666", "2002-06-24");
 INSERT INTO students (first_name, last_name, email, phone, birthdate)
     VALUES ("Alice", "Wonderland", "alice@wonderland.com", "555-4444", "2002-07-04");
 ```
