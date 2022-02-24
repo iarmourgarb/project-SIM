@@ -35,10 +35,8 @@
   Student ID: <input type="text" name="username" placeholder="Enter Student ID" /><br>
   Test: <input type="text" name="test" placeholder="Enter Test" /><br>
   <input type="submit" name="submit" value="Submit"/>
-  <!-- 
-    Make sure that there is a value available for $out_value.
-    If so, print to the screen.
-  -->
+
+
   <p>
   <?php
     $servername = "localhost";
@@ -76,7 +74,7 @@
             do {
                 $row = mysqli_fetch_assoc($result);
                 if ($row != NULL) {
-                    $out_value = $row['song'] . "->" . $row['rating'] . "\n";
+                    $out_value = $row['song'] . "->" . $row['rating'] . "</br>";
                     echo $out_value;
                 }
         } while ($row != NULL);}
