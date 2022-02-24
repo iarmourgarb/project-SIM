@@ -32,9 +32,8 @@
     (https://stackoverflow.com/questions/1131781/is-it-a-good-practice-to-use-an-empty-url-for-a-html-forms-action-attribute-a)
   -->
   <form method="POST" action="">
-  Student ID: <input type="text" name="username" placeholder="Enter Student ID" /><br>
-  Test: <input type="text" name="test" placeholder="Enter Test" /><br>
-  <input type="submit" name="submit" value="Submit"/>
+  Username: <input type="text" name="username" placeholder="Enter Username" /><br>
+  <input type="submit" name="submit" value="Retrieve Ratings"/>
 
 
   <p>
