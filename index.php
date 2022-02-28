@@ -61,11 +61,6 @@
                         $row = mysqli_fetch_assoc($result);
                         $out_value .= $row['song'] . "->" . $row['rating'] . "</br>";
                     }
-                    // $row = mysqli_fetch_assoc($result);
-                    // do {
-                    //     $row = mysqli_fetch_assoc($result);
-                    //     $out_value .= $row['song'] . "->" . $row['rating'] . "</br>";
-                    // }while ($row != NULL);
                 }
             }else {
                 $out_value .= "No user given";
