@@ -8,9 +8,11 @@
 <head>
     <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded"/>
     <title>Homework 2</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    
     <form method="POST" action="">
     Username: <input type="text" name="username" placeholder="Enter Username" /><br>
     <input type="submit" name="submit" value="Retrieve Ratings"/><br>
