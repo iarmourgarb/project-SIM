@@ -86,19 +86,30 @@
       else {
             echo "No user given";
       }
-    }
+    } 
     else if (isset($_REQUEST["registration"])){
         $user = $_REQUEST['account-id'];
         $pw = $_REQUEST['password'];
-        $sql_query = "INSERT INTO users VALUES ('$user', '$pw')";
-        if (mysqli_query($conn, $sql_query)) {
-            echo "yay";
+        if (!empty($user) and !empty($pw)) {
+            $sql_query = "INSERT INTO users VALUES ('$user', '$pw')";
+            if (mysqli_query($conn, $sql_query)) {
+                echo "User: " . $user . " registered successfully.";
+            }
+            else {
+                echo "Username is taken, please give another.";
+            }
+        } 
+        else if (!empty($pw)){
+            echo "Username is missing.";
+        }
+        else if (!empty($user)){
+            echo "Password is missing.";
         }
         else {
-            echo "noo" . mysqli_error($conn);
+            echo "Password and Username missing.";
         }
-
     }
+    
 
     $conn->close();
   ?></p>
