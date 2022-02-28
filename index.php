@@ -33,11 +33,14 @@
   -->
   <form method="POST" action="">
   Username: <input type="text" name="username" placeholder="Enter Username" /><br>
-  <input type="submit" name="submit" value="Retrieve Ratings"/>
+  <input type="submit" name="submit" value="Retrieve Ratings"/><br>
 
+  <form method="POST" action="">
+  Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
+  Password: <input type="text" name="password" placeholder="Enter Password" /><br>
+  <input type="submit" name="registration" value="Register"/>
 
-  <p>
-  <?php
+  <p><?php
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -81,12 +84,24 @@
         
       }
       else {
-        echo "No user given";
+            echo "No user given";
       }
+    }
+    else if (isset($_REQUEST["registration"])){
+        $user = $_REQUEST['account-id'];
+        $pw = $_REQUEST['password'];
+        $sql_query = "INSERT INTO users VALUES ('$user', '$pw')";
+        if (mysqli_query($conn, $sql_query)) {
+            echo "yay";
+        }
+        else {
+            echo "noo" . mysqli_error($conn);
+        }
+
     }
 
     $conn->close();
-  ?> </p>
+  ?></p>
   </form>
 </body>
 </html>
