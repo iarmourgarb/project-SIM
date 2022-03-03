@@ -12,4 +12,4 @@ class Artist(models.Model):
 class Rating(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     song = models.ForeignKey(Artist, on_delete = models.CASCADE)
-    rating = models.IntegerField(max_length = 1)
+    rating = models.IntegerField(default= 1)
