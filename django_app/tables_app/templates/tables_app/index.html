@@ -17,15 +17,17 @@
     <input type="submit" name="song_retrieval" placeholder="Retrieve Songs"/>
 </form>
 
-{% if registration %}
+{% if type == "registration" %}
     {% if error %}
         <p>{{ error }}</p>
     {% elif success %}
         <p>{{ success }}</p>
     {% endif %}
 
-{% elif song_retrieval %}
-    {% if ratings %}
+{% elif type == "song_retrieval" %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% elif ratings %}
        {% for rating in ratings %}
             <p>{{ rating }}</p><br>
         {% endfor %}

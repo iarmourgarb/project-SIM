@@ -11,6 +11,7 @@ def index(request):
     if request.method == "POST":
         #registration form
         if request['registration']:
+            context["type"] = "registration"
             username = request['username']
             password = request['password']
             if username == "" and password == "":
@@ -30,6 +31,7 @@ def index(request):
                     context["success"] = "User " + username + " registered successfully"
         #other form
         elif request["song_retrival"]:
+            context["type"] = "song_retrival"
             user = request['user']
             if user == "":
                 context={"error:" : "No user given"}
