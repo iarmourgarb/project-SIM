@@ -42,14 +42,14 @@ def index(request):
                 context["success"] = printout
             except:
                 context["error"] = "User has not rated any songs"
-    #check if username is already there
-    try:
-        user_check = User.objects.get(pk=user)
-    except User.DoesNotExist:
-        context
-    try:
-        ratings= Rating.objects.filter(username=user)
-    return render(request, "tables-app/index.html",context)
+            #check if username is already there
+            # try:
+            #     user_check = User.objects.get(pk=user)
+            # except User.DoesNotExist:
+            #     context["error"] = "No such user in the system"
+            # try:
+            #     ratings= Rating.objects.filter(username=user)
+            return render(request, "tables-app/index.html",context)
 
 
 def index(request):
