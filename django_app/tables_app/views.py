@@ -10,8 +10,7 @@ def index(request):
     context={}
     if request.method == "POST":
         #registration form
-        try:
-            request.POST['registration']
+        if "registration" in request.POST:
             context["type"] = "registration"
             username = request.POST['username']
             password = request.POST['password']
@@ -30,11 +29,8 @@ def index(request):
                 except:
                     User(username=username,password=password).save()
                     context["success"] = "User " + username + " registered successfully"
-        except:
-            pass
         #other form
-        try:
-            request.POST["song_retrieval"]
+        elif "song_retrieval" in request.POST:
             context["type"] = "song_retrieval"
             user = request.POST['user']
             if user == "":
@@ -50,7 +46,5 @@ def index(request):
                 context["ratings"] = printout
             except:
                 context["error"] = "Unknown User "
-        except:
-            raise Http404("I don't know how you did this")
             
     return render(request, "tables_app/index.html",context)
