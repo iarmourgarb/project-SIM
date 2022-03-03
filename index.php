@@ -12,16 +12,16 @@
 </head>
 
 <body>
-    
-    <form method="POST" action="">
-    Username: <input type="text" name="username" placeholder="Enter Username" /><br>
-    <input type="submit" name="submit" value="Retrieve Ratings"/><br>
 
     <form method="POST" action="">
-    Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
-    Password: <input type="text" name="password" placeholder="Enter Password" /><br>
-    <input type="submit" name="registration" value="Register"/>
-
+        Username: <input type="text" name="username" placeholder="Enter Username" /><br>
+        <input type="submit" name="submit" value="Retrieve Ratings"/><br>
+    </form>
+    <form method="POST" action="">
+        Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
+        Password: <input type="text" name="password" placeholder="Enter Password" /><br>
+        <input type="submit" name="registration" value="Register"/>
+    </form>
     <p><?php
         $servername = "localhost";
         $username = "root";

@@ -1,0 +1,35 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded"/>
+    <title>Homework 2</title>
+</head>
+
+<form method="POST" action="">
+    Username: <input type="text" name="username" placeholder="Enter Username"/><br>
+    Password: <input type="text" name="password" placeholder="Enter Password"/><br>
+    <input type="submit" name="registration" placeholder="Register"/>
+</form>
+
+<form method="POST" action="">
+    Username: <input type="text" name="user" placeholder="Enter Username"/><br>
+    <input type="submit" name="song_retrieval" placeholder="Retrieve Songs"/>
+</form>
+
+{% if registration %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% elif success %}
+        <p>{{ success }}</p>
+    {% endif %}
+
+{% elif song_retrieval %}
+    {% if ratings %}
+       {% for rating in ratings %}
+            <p>{{ rating }}</p><br>
+        {% endfor %}
+    {% else %}
+        <p>No ratings recorded</p>
+    {% endif %}
+{% endif %}
