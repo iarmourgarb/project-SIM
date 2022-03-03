@@ -26,7 +26,7 @@ def index(request):
                     if user_check:
                         context["error"] = "Username already taken"
                 except:
-                    User.(username=username,password=password).save()
+                    User(username=username,password=password).save()
                     context["success"] = "User " + username + " registered successfully"
         #other form
         elif request["song_retrival"]:

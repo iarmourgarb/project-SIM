@@ -20,8 +20,9 @@
 {% if registration %}
     {% if error %}
         <p>{{ error }}</p>
+    {% elif success %}
+        <p>{{ success }}</p>
     {% endif %}
-
 
 {% elif song_retrieval %}
     {% if ratings %}
