@@ -34,8 +34,8 @@ def index(request):
             pass
         #other form
         try:
-            request.POST["song_retrival"]
-            context["type"] = "song_retrival"
+            request.POST["song_retrieval"]
+            context["type"] = "song_retrieval"
             user = request.POST['user']
             if user == "":
                 context={"error:" : "No user given"}
@@ -46,7 +46,7 @@ def index(request):
                     context["error"] = "User has not rated any songs"
                 printout = []
                 for i in ratings:
-                    printout.append(i.song + "-->" + i.rating)
+                    printout.append(i.str_song() + " --> " + i.str_rating())
                 context["ratings"] = printout
             except:
                 context["error"] = "Unknown User "
