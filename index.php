@@ -1,4 +1,4 @@
-<!-- 
+<!--
   COMP 333: Software Engineering
   Sam Ephron, Magda Kisielinska, Isabel Armour-Garb
 -->
@@ -12,16 +12,26 @@
 </head>
 
 <body>
+  <div class="grid-container">
 
-    <form method="POST" action="">
-        Username: <input type="text" name="username" placeholder="Enter Username" /><br>
-        <input type="submit" name="submit" value="Retrieve Ratings"/><br>
-    </form>
-    <form method="POST" action="">
-        Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
-        Password: <input type="text" name="password" placeholder="Enter Password" /><br>
-        <input type="submit" name="registration" value="Register"/>
-    </form>
+    <div class= "grid-item">
+      <h2> Look-Up Songs Rated by Anyone </h2>
+      <form method="POST" action="">
+          Username: <input type="text" name="username" placeholder="Enter Username" /><br>
+          <input type="submit" name="submit" value="Retrieve Ratings"/><br>
+      </form>
+    </div>
+
+    <div class="grid-item">
+      <h2> Register </h2>
+      <form method="POST" action="">
+          Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
+          Password: <input type="text" name="password" placeholder="Enter Password" /><br>
+          <input type="submit" name="registration" value="Register"/>
+      </form>
+
+    </div>
+
     <p><?php
         $servername = "localhost";
         $username = "root";
@@ -49,7 +59,7 @@
                 // Send the query and obtain the result.
                 // mysqli_query performs a query against the database.
                 $result = mysqli_query($conn, $sql_query);
-                // mysqli_fetch_assoc rturns an associative array that corresponds to the 
+                // mysqli_fetch_assoc rturns an associative array that corresponds to the
                 // fetched row or NULL if there are no more rows.
                 // Probably does not make much of a difference here, but, e.g., if there are
                 // multiple rows returned, you can iterate over those with a loop.
@@ -85,7 +95,6 @@
                 $out_value .= "Username and Password missing.";
             }
         }
-
         echo $out_value;
 
     $conn->close();
