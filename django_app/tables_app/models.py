@@ -1,5 +1,10 @@
 from django.db import models
 
+# add Album to Artist table
+# Review table, foreign keys User and Artist
+# Review and Rating date
+
+
 # Create your models here.
 class User(models.Model):
     username = models.CharField(max_length = 255, primary_key = True)

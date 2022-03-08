@@ -46,5 +46,14 @@ def index(request):
                 context["ratings"] = printout
             except:
                 context["error"] = "Unknown User "
+
+        elif "reviews" in request.POST:
+            context["type"] = "review_retrieval"
+            date = request.POST['date']
+            if date == "":
+                context['error'] = "No date provided"
+            else:
+                
+
             
     return render(request, "tables_app/index.html",context)

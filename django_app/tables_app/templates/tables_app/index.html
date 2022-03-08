@@ -23,7 +23,7 @@
         </div>
 
         <div class="grid-item">
-            <h2> Register </h2>
+            <h2>Register Account</h2>
             <form method="POST" action="">
                 {% csrf_token %}
                 Username: <input type="text" name="username" placeholder="Enter Username"/><br>
@@ -31,6 +31,14 @@
                 <input type="submit" name="registration" placeholder="Register"/>
             </form>
 
+        </div>
+
+        <div class="grid-item">
+            <h2>Reviews Search</h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                Date: <input type="date" name="date" placeholder="2000-07-02"/><br>
+                <input type="submit" name="reviews" placeholder="Search Reviews"/>
         </div>
     </div>
 
@@ -52,6 +60,14 @@
         {% elif ratings %}
            {% for rating in ratings %}
                 <p>{{ rating }}</p>
+            {% endfor %}
+        {% endif %}
+    {% elif type == "review_retrieval" %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% elif reviews %}
+            {% for review in reviews %}
+                <p>{{ review }}</p>
             {% endfor %}
         {% endif %}
     {% endif %}
