@@ -1,37 +1,60 @@
+<!--
+  COMP 333: Software Engineering
+  Sam Ephron, Magda Kisielinska, Isabel Armour-Garb
+-->
 
+{% load static %}
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded"/>
     <title>Homework 2</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'tables_app/styles.css' %}">
 </head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item">
+            <h2> Look-Up Songs Rated by Anyone </h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                Username: <input type="text" name="user" placeholder="Enter Username"/><br>
+                <input type="submit" name="song_retrieval" placeholder="Retrieve Songs"/>
+            </form>
+        </div>
 
-<form method="POST" action="">
-    {% csrf_token %}
-    Username: <input type="text" name="username" placeholder="Enter Username"/><br>
-    Password: <input type="text" name="password" placeholder="Enter Password"/><br>
-    <input type="submit" name="registration" placeholder="Register"/>
-</form>
+        <div class="grid-item">
+            <h2> Register </h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                Username: <input type="text" name="username" placeholder="Enter Username"/><br>
+                Password: <input type="text" name="password" placeholder="Enter Password"/><br>
+                <input type="submit" name="registration" placeholder="Register"/>
+            </form>
 
-<form method="POST" action="">
-    {% csrf_token %}
-    Username: <input type="text" name="user" placeholder="Enter Username"/><br>
-    <input type="submit" name="song_retrieval" placeholder="Retrieve Songs"/>
-</form>
+        </div>
+    </div>
 
-{% if type == "registration" %}
-    {% if error %}
-        <p>{{ error }}</p>
-    {% elif success %}
-        <p>{{ success }}</p>
+
+
+
+
+
+    {% if type == "registration" %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% elif success %}
+            <p>{{ success }}</p>
+        {% endif %}
+
+    {% elif type == "song_retrieval" %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% elif ratings %}
+           {% for rating in ratings %}
+                <p>{{ rating }}</p>
+            {% endfor %}
+        {% endif %}
     {% endif %}
 
-{% elif type == "song_retrieval" %}
-    {% if error %}
-        <p>{{ error }}</p>
-    {% elif ratings %}
-       {% for rating in ratings %}
-            <p>{{ rating }}</p>
-        {% endfor %}
-    {% endif %}
-{% endif %}
+</body>
+</html>
