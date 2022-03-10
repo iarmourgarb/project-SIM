@@ -28,3 +28,7 @@ Review(username=amelia, song=walls, review="I hate this song", review_date="2000
 ```
 python3 manage.py createsuperuser
 ```
+-- To run the server just type the below in the terminal
+```
+python3 manage.py runserver
+```

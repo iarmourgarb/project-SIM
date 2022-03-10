@@ -1,7 +1,8 @@
 <!-- for question 1 on homework 2: creating 3 tables in a new database using phpMyAdmin -->
 
-
 ```sql
+-- Create database
+CREATE DATABASE `music-db`;
 -- users table (primary key: username)
 CREATE TABLE users (
     username varchar(255) NOT NULL PRIMARY KEY,
