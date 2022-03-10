@@ -32,7 +32,7 @@ class Rating(models.Model):
         return str(self.rating)
 
     def str_rate_date(self):
-        return str(self.rate_date)
+        return str(self.rate_date)[:10]
 
 class Review(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -50,4 +50,4 @@ class Review(models.Model):
         return self.review
 
     def str_review_date(self):
-        return str(self.review_date)
+        return str(self.review_date)[:10]
