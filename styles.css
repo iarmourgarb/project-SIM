@@ -1,3 +1,5 @@
+/* COMP 333: Software Engineering
+Sam Ephron, Magda Kisielinska, Isabel Armour-Garb */
 
 /* font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
@@ -20,6 +22,7 @@ body {
     padding-top: 100px;
     align-items:center;
     background-color: white;
+    text-align: center;
 }
 
 .grid-item {
@@ -31,8 +34,3 @@ body {
         background-color: lightblue;
         border-style:solid;
       }
-
-.flex-box {
-
-
-}

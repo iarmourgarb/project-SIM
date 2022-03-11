@@ -12,26 +12,6 @@
 </head>
 
 <body>
-  <div class="grid-container">
-
-    <div class= "grid-item">
-      <h2> Look-Up Songs Rated by Anyone </h2>
-      <form method="POST" action="">
-          Username: <input type="text" name="username" placeholder="Enter Username" /><br>
-          <input type="submit" name="submit" value="Retrieve Ratings"/><br>
-      </form>
-    </div>
-
-    <div class="grid-item">
-      <h2> Register </h2>
-      <form method="POST" action="">
-          Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
-          Password: <input type="text" name="password" placeholder="Enter Password" /><br>
-          <input type="submit" name="registration" value="Register"/>
-      </form>
-
-    </div>
-
     <p><?php
         $servername = "localhost";
         $username = "root";
@@ -46,7 +26,8 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $out_value = "";
+        $out_value_reg = "";
+        $out_value_look_up = "";
 
         if(isset($_REQUEST["submit"])){
             // Variables for the output and the web form below.
@@ -65,17 +46,17 @@
                 // multiple rows returned, you can iterate over those with a loop.
                 $count = $result-> num_rows;
                 if ($count === 0){
-                    $out_value .= "No songs rated by " . $s_id;
+                    $out_value_look_up .= "No songs rated by " . $s_id;
                 }else {
                     $i = 0;
                     while ($i<$count) {
                         $i++;
                         $row = mysqli_fetch_assoc($result);
-                        $out_value .= $row['song'] . "->" . $row['rating'] . "</br>";
+                        $out_value_look_up .= $row['song'] . "->" . $row['rating'] . "</br>";
                     }
                 }
             }else {
-                $out_value .= "No user given";
+                $out_value_look_up .= "No user given";
             }
         }else if (isset($_REQUEST["registration"])){
             $user = $_REQUEST['account-id'];
@@ -83,22 +64,47 @@
             if (!empty($user) and !empty($pw)) {
                 $sql_query = "INSERT INTO users VALUES ('$user', '$pw')";
                 if (mysqli_query($conn, $sql_query)) {
-                    $out_value .= "User: " . $user . " registered successfully.";
+                    $out_value_reg .= "User: " . $user . " registered successfully.";
                 }else {
-                    $out_value .= "Username is taken, please give another.";
+                    $out_value_reg .= "Username is taken, please give another.";
                 }
             }else if (!empty($pw)){
-                $out_value .= "Username is missing.";
+                $out_value_reg .= "Username is missing.";
             }else if (!empty($user)){
-                $out_value .= "Password is missing.";
+                $out_value_reg .= "Password is missing.";
             }else {
-                $out_value .= "Username and Password missing.";
+                $out_value_reg .= "Username and Password missing.";
             }
         }
-        echo $out_value;
+        // echo $out_value;
 
     $conn->close();
+
   ?></p>
+
+  <div class="grid-container">
+
+    <div class= "grid-item">
+      <h2> Look-Up Songs Rated by Anyone </h2>
+      <form method="POST" action="">
+          Username: <input type="text" name="username" placeholder="Enter Username" /><br>
+          <input type="submit" name="submit" value="Retrieve Ratings"/><br>
+          <?=$out_value_look_up?>
+      </form>
+    </div>
+
+    <div class="grid-item">
+      <h2> Register </h2>
+      <form method="POST" action="">
+          Username: <input type="text" name="account-id" placeholder="Enter Username" /><br>
+          Password: <input type="text" name="password" placeholder="Enter Password" /><br>
+          <input type="submit" name="registration" value="Register"/>
+          <?=$out_value_reg?>
+      </form>
+
+    </div>
+
+
   </form>
 </body>
 </html>
