@@ -22,7 +22,7 @@ class Artist(models.Model):
 class Rating(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     song = models.ForeignKey(Artist, on_delete = models.CASCADE)
-    rating = models.IntegerField(default= 1, primary_key = True)
+    rating = models.IntegerField(default= 1)
     rate_date = models.DateField(default=datetime.now)
 
     def str_song(self):
