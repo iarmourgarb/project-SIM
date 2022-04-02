@@ -34,20 +34,3 @@ class Rating(models.Model):
     def str_rate_date(self):
         return str(self.rate_date)[:10]
 
-class Review(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
-    song = models.ForeignKey(Artist, on_delete = models.CASCADE)
-    review = models.CharField(max_length=510)
-    review_date = models.DateField(default=datetime.now)
-
-    def str_user(self):
-        return self.username.str_user()
-
-    def str_song(self):
-        return self.song.str_song()
-
-    def str_review(self):
-        return self.review
-
-    def str_review_date(self):
-        return str(self.review_date)[:10]

@@ -14,7 +14,3 @@ class ArtistAdmin(admin.ModelAdmin):
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):
     pass
-
-@admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    pass
