@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import User, Artist, Rating, Review
+from .models import User, Artist, Rating
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
