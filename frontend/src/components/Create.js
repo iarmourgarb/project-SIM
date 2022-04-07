@@ -24,10 +24,20 @@ function CreateSong(props) {
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     console.log("submitted")
 
-    axios.post('http://localhost:8000/api/artists', {
-    username: songUsername,
+    axios.post('http://localhost:8000/api/artists/', {
     artist: songArtist,
-    title:songTitle,
+    song:songTitle,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    }); }
+
+    axios.post('http://localhost:8000/api/ratings/', {
+    username: songUsername,
+    song:songTitle,
     rating:songRating
   })
   .then(function (response) {
@@ -37,7 +47,7 @@ function CreateSong(props) {
     console.log(error);
   });
 
-  }
+
   return (
 
     <form onSubmit={handleSubmit}>
