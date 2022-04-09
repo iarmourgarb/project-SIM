@@ -14,29 +14,20 @@ import {
 
 // This form will be for adding a song with a writing into the database
 
-function CreateSong(props) {
-  const [songUsername, setSongUsername] = useState("Mags")
-  const [songTitle, setSongTitle] = useState("Happy")
-  const [songArtist, setSongArtist] = useState("Pharrel")
-  const [songRating, setSongRating] = useState("5")
+export default function CreateSong(props) {
+  const [songUsername, setSongUsername] = useState("")
+  const [songTitle, setSongTitle] = useState("")
+  const [songArtist, setSongArtist] = useState("")
+  const [songRating, setSongRating] = useState("")
 
   const handleSubmit = (formData) => {
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     console.log("submitted")
 
-    axios.post('http://localhost:8000/api/artists/', {
-    artist: songArtist,
-    song:songTitle,
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    }); }
 
-    axios.post('http://localhost:8000/api/ratings/', {
+    axios.post('http://localhost:8000/api/ratings/new_rating/', {
     username: songUsername,
+    artist:songArtist,
     song:songTitle,
     rating:songRating
   })
@@ -45,7 +36,7 @@ function CreateSong(props) {
   })
   .catch(function (error) {
     console.log(error);
-  });
+  });};
 
 
   return (
@@ -67,12 +58,12 @@ function CreateSong(props) {
         Rating:
         <input type="text" value={songRating} onChange={e => setSongRating(e.target.value)} />
       </label>
-      <input type="submit" value="Submit" onClick={() => handleSubmit("")}/>
+      <input type="submit" value="Submit" />
     </form>
   );
 }
 
-export default CreateSong;
+// export default CreateSong;
 
 //
 // // code from the Internet
@@ -106,4 +97,4 @@ export default CreateSong;
 //       </form>
 //     );
 //   }
-// }
+// };

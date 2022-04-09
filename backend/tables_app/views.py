@@ -19,8 +19,20 @@ class RatingView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def new_rating(self, request):
-        request.
-
+        user = request.data["username"]
+        rating = request.data["rating"]
+        artist = request.data["artist"]
+        song = request.data["song"]
+        if not Artist.objects.filter(pk=song):
+            new_song = Artist(song=song, artist=artist)
+            new_song.save()
+        if Rating.objects.filter(username=user).filter(song=song):
+            return Response({'status': 'Song already rated'})#User has already rated this song
+        else:
+            serial = self.serializer_class(data=request.data)
+            if serial.is_valid():
+                serial.save()
+        return Response({'status': 'Rating created'})
     
 
 class ArtistView(viewsets.ModelViewSet):
