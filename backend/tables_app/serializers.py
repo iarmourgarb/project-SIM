@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, validators
 
 from .models import User, Artist, Rating
 
@@ -16,3 +16,6 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = ('id', 'username', 'song', 'rating')
+        validators = [
+        validators.UniqueTogetherValidator(queryset=Rating.objects.all(), fields=['username', 'song'])
+    ]

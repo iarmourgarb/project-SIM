@@ -26,13 +26,12 @@ class RatingView(viewsets.ModelViewSet):
         if not Artist.objects.filter(pk=song):
             new_song = Artist(song=song, artist=artist)
             new_song.save()
-        if Rating.objects.filter(username=user).filter(song=song):
-            return Response({'status': 'Song already rated'})#User has already rated this song
+        serial = self.serializer_class(data=request.data)
+        if serial.is_valid():
+            serial.save()
+            return Response({'status': 'Rating created'})
         else:
-            serial = self.serializer_class(data=request.data)
-            if serial.is_valid():
-                serial.save()
-        return Response({'status': 'Rating created'})
+            return Response({'status': 'Song already rated'})
     
 
 class ArtistView(viewsets.ModelViewSet):
