@@ -16,7 +16,7 @@ class RatingSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
-        song = validated_data["song"] #This might need to be adjusted
+        song = validated_data["song"].song
         rating = validated_data["rating"]
         song_object = Artist.objects.get(pk=song)
         count = song_object.count

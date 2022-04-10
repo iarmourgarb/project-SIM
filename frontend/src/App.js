@@ -4,6 +4,7 @@ import axios from "axios";
 import React from "react";
 import Create from "./components/Create";
 import CreateSong from "./components/Create";
+import Read from "./components/Read"
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
   // });
   return (
   //   <CreateSong handleSubmit={handleSubmit}/>
-      <CreateSong/>
+      // <CreateSong/>
+      <Read/>
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />
