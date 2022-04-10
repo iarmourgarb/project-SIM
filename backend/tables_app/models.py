@@ -12,6 +12,8 @@ class User(models.Model):
 class Artist(models.Model):
     song = models.CharField(max_length = 255, primary_key = True)
     artist = models.CharField(max_length = 255)
+    count = models.IntegerField(default=0)
+    avgRating = models.FloatField(default=0)
 
     def str_song(self):
         return self.song
@@ -22,15 +24,11 @@ class Artist(models.Model):
 class Rating(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     song = models.ForeignKey(Artist, on_delete = models.CASCADE)
-    rating = models.IntegerField(default= 1)
-    # rate_date = models.DateField(default=datetime.now)
+    artist = models.CharField(max_length = 255, default = "")
+    rating = models.IntegerField(default= 0)
 
     def str_song(self):
         return self.song.str_song()
 
     def str_rating(self):
         return str(self.rating)
-
-    # def str_rate_date(self):
-    #     return str(self.rate_date)[:10]
-
