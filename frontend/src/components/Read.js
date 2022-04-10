@@ -6,7 +6,7 @@
   // items that scroll way off screen to save memory and processing time.
   import { FlatList, Text, View } from "react-native";
 
-  export default function App() {
+  export default function Read() {
     // Initially, set isLoading to true and set up the setLoading function for
     // later changing the isLoading value.
     const [isLoading, setLoading] = useState(true);

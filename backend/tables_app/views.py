@@ -7,7 +7,11 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, RatingSerializer, ArtistSerializer
 from .models import User, Rating, Artist
 
-# 
+# Create, Read, Update, Delete of Rating - add artist attribute
+# Interfacing with Song - add count and avgRating attributes
+# Need to write the song,artist,avgRating list function
+
+
 # Create your views here.
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
@@ -19,8 +23,6 @@ class RatingView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def new_rating(self, request):
-        user = request.data["username"]
-        rating = request.data["rating"]
         artist = request.data["artist"]
         song = request.data["song"]
         if not Artist.objects.filter(pk=song):
