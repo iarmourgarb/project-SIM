@@ -13,21 +13,29 @@ class ArtistSerializer(serializers.ModelSerializer):
     avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = Artist
-        fields = ('song', 'artist', 'avg_rating')
+        fields = ('id', 'song', 'artist', 'avg_rating')
+        indexes = [models.Index(fields=["song", "artist"])]
+
     
     def get_avg_rating(self, obj):
-        song = obj.song
-        ratings = Rating.objects.filter(song=song).aggregate(Avg('rating'))
-        return ratings
+        song_id = obj.id
+        ratings = Rating.objects.filter(song_id=song_id).aggregate(Avg('rating'))
+        return ratings['rating__avg']
 
 class RatingSerializer(serializers.ModelSerializer):
 
     artist = serializers.SerializerMethodField()
+    song = serializers.SerializerMethodField()
     class Meta:
         model = Rating
-        fields = ('id', 'username', 'song', 'rating', 'artist')
-        validators = [validators.UniqueTogetherValidator(queryset=Rating.objects.all(), fields=['username', 'song'])]
-        indexes = [models.Index(fields=["username", "song"])]
+        fields = ('id', 'username', 'song_id', 'song', 'artist', 'rating')
+        validators = [validators.UniqueTogetherValidator(queryset=Rating.objects.all(), fields=['username', 'song_id'])]
+        indexes = [models.Index(fields=["username", "song_id"])]
 
     def get_artist(self, obj):
-        return obj.song.artist
+        artist = obj.song_id.artist
+        return artist
+
+    def get_song(self, obj):
+        song = obj.song_id.song
+        return song

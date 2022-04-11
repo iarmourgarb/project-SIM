@@ -5,10 +5,11 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, RatingSerializer, ArtistSerializer
 from .models import User, Rating, Artist
 
-# Create, Read, Update, Delete of Rating - add artist attribute
-# Interfacing with Song - add count and avgRating attributes
-# Need to write the song,artist,avgRating list function
-
+# Create, Read, Update, Delete of Rating - DONE / except for some more testing but seems to all be in order
+# Need to ensure that list functions are correct
+# Need editing to be allowed for a song title and artist - Need to also figure out the best way to have it impact editing
+ # might necessitate making an id - primary key and sorting it out from there
+# Need to allow deleting of ratings separate from song deletion
 
 # Create your views here.
 class UserView(viewsets.ModelViewSet):
@@ -20,10 +21,10 @@ class RatingView(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
 
     @action(detail=False, methods=['post'])
-    def new_rating(self, request):
+    def post(self, request):
         song = request.data["song"]
         artist = request.data["artist"]
-        if not Artist.objects.filter(pk=song):
+        if not Artist.objects.filter(song=song, artist=artist):
             new_song = Artist(song=song,artist=artist)
             new_song.save()
         serial = self.serializer_class(data=request.data)
@@ -33,9 +34,34 @@ class RatingView(viewsets.ModelViewSet):
         else:
             return Response({'status': 'Song already rated'})
 
-    
-    
+    def put(self, request):
+        user = request.data['username']
+        song_id = request.data['song_id']
+        rating = request.data['rating']
+        objs = Rating.objects.filter(username=user, song_id=song_id)
+        if objs:
+            obj = objs[0]
+            obj.rating = rating
+            obj.save()
+            return Response({'status': "Rating updated"})
+        else:
+            return Response({'status': 'No rating to update'})
+        
 
 class ArtistView(viewsets.ModelViewSet):
     serializer_class = ArtistSerializer
     queryset = Artist.objects.all()
+
+    def put(self, request):
+        id = request.data['id']
+        song = request.data['song']
+        artist = request.data['artist']
+        objs = Artist.objects.filter(pk=id)
+        if objs:
+            obj = objs[0]
+            obj.song = song
+            obj.artist = artist
+            obj.save()
+            return Response({'status': 'Song updated'})
+        else:
+            return Response({'status': 'Song not updated'})

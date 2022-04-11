@@ -25,7 +25,7 @@ export default function CreateSong(props) {
     console.log("submitted")
 
 
-    axios.post('http://localhost:8000/api/ratings/new_rating/', {
+    axios.post('http://localhost:8000/api/ratings/post/', {
     username: songUsername,
     artist:songArtist,
     song:songTitle,
