@@ -18,22 +18,39 @@
     // have one parameter, fetch(), and an empty function body.
     // Note that items in a Django database can be retrieved that way as well.
     // Try it out with Postman.
-    useEffect(() => {
+
+    // rewrite as try catch
+
+    const myFunc = async () => {
       // Pass the URL to the fetch API.
-      fetch("http://localhost:8000/api/artists/")
-        // Parse the response object and extract the json response that is obtained.
-        .then((response) => console.log(response))
-        // response.data)
-        // Set the empty data variable to the fetched data.
-        .then((json) => console.log(data))
-        // setData(json))
-        // Catch any errors thrown from the fetch call.
-        .catch((error) => console.error(error))
-        // While the data is loading, show the isLoading view below.
-        // Once setLoading() sets isLoading to false, show the view with the
-        // loaded data.
-        .finally(() => setLoading(false));
-    }, []);
+      try {
+        const response = await axios.get("http://localhost:8000/api/artists/")
+        setData(response.data)
+        setLoading(false)
+        console.log('hello')
+        console.log(data);
+        // console.log(response.data)
+      } catch (err){
+        console.error(err);
+      }
+    }
+
+    useEffect(() => {
+      myFunc();
+      // axios.get("http://localhost:8000/api/artists/")
+      //   // Parse the response object and extract the json response that is obtained.
+      //   .then((response) => response.data)
+      //   // Set the empty data variable to the fetched data.
+      //   .then((json) => setData(json))
+      //   // Catch any errors thrown from the fetch call.
+      //   .catch((error) => console.error(error))
+      //   // While the data is loading, show the isLoading view below.
+      //   // Once setLoading() sets isLoading to false, show the view with the
+      //   // loaded data.
+      //   .finally(() => setLoading(false));
+    }, [data]);
+
+
 
     return (
       // Now the component parses the data and renders it using a FlatList component.
@@ -60,7 +77,7 @@
                 textAlign: "center",
                 paddingBottom: 10,
               }}
-            >   {data.song}
+            >   {data.artist}
               Artist:
             </p>
             <FlatList
