@@ -1,5 +1,3 @@
-from re import L
-from wsgiref.validate import validator
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -23,10 +21,10 @@ class RatingView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def new_rating(self, request):
-        artist = request.data["artist"]
         song = request.data["song"]
+        artist = request.data["artist"]
         if not Artist.objects.filter(pk=song):
-            new_song = Artist(song=song, artist=artist)
+            new_song = Artist(song=song,artist=artist)
             new_song.save()
         serial = self.serializer_class(data=request.data)
         if serial.is_valid():
@@ -34,6 +32,8 @@ class RatingView(viewsets.ModelViewSet):
             return Response({'status': 'Rating created'})
         else:
             return Response({'status': 'Song already rated'})
+
+    
     
 
 class ArtistView(viewsets.ModelViewSet):

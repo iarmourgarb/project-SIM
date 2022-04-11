@@ -1,5 +1,6 @@
 from rest_framework import serializers, validators
-
+from django.db import models
+from django.db.models import Avg
 from .models import User, Artist, Rating
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,33 +9,25 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'password')
 
 class ArtistSerializer(serializers.ModelSerializer):
+    
+    avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = Artist
-        fields = ('song', 'artist', 'count', 'avgRating')
+        fields = ('song', 'artist', 'avg_rating')
+    
+    def get_avg_rating(self, obj):
+        song = obj.song
+        ratings = Rating.objects.filter(song=song).aggregate(Avg('rating'))
+        return ratings
 
 class RatingSerializer(serializers.ModelSerializer):
 
-
-    def create(self, validated_data):
-        song = validated_data["song"].song
-        rating = validated_data["rating"]
-        song_object = Artist.objects.get(pk=song)
-        count = song_object.count
-        avg_rating = song_object.avgRating
-        count += 1
-        if avg_rating == 0:
-            avg_rating += rating
-        else:
-            avg_rating = (avg_rating * (count-1) + rating)/count
-        song_object.count = count
-        song_object.avgRating = avg_rating
-        song_object.save()
-
-        return Rating.objects.create(**validated_data)
-
+    artist = serializers.SerializerMethodField()
     class Meta:
         model = Rating
-        fields = ('id', 'username', 'song', 'artist', 'rating')
-        validators = [
-        validators.UniqueTogetherValidator(queryset=Rating.objects.all(), fields=['username', 'song'])
-    ]
+        fields = ('id', 'username', 'song', 'rating', 'artist')
+        validators = [validators.UniqueTogetherValidator(queryset=Rating.objects.all(), fields=['username', 'song'])]
+        indexes = [models.Index(fields=["username", "song"])]
+
+    def get_artist(self, obj):
+        return obj.song.artist
