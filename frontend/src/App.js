@@ -22,7 +22,10 @@ function App() {
   // });
   return (
   //   <CreateSong handleSubmit={handleSubmit}/>
+    <div>
       <CreateSong/>
+      <Read/>
+    </div>
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />

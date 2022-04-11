@@ -6,7 +6,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #282c34;
+    background-color: white;
   }
   button {
     margin: 5px;
@@ -35,5 +35,3 @@ body {
     background-color: #282c34;
     color: #ffffff;
   }
-
-
