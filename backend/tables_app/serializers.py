@@ -26,10 +26,10 @@ class RatingSerializer(serializers.ModelSerializer):
 
     artist = serializers.SerializerMethodField()
     song = serializers.SerializerMethodField()
+
     class Meta:
         model = Rating
         fields = ('id', 'username', 'song_id', 'song', 'artist', 'rating')
-        validators = [validators.UniqueTogetherValidator(queryset=Rating.objects.all(), fields=['username', 'song_id'])]
         indexes = [models.Index(fields=["username", "song_id"])]
 
     def get_artist(self, obj):

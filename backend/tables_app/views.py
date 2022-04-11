@@ -6,10 +6,6 @@ from .serializers import UserSerializer, RatingSerializer, ArtistSerializer
 from .models import User, Rating, Artist
 
 # Create, Read, Update, Delete of Rating - DONE / except for some more testing but seems to all be in order
-# Need to ensure that list functions are correct
-# Need editing to be allowed for a song title and artist - Need to also figure out the best way to have it impact editing
- # might necessitate making an id - primary key and sorting it out from there
-# Need to allow deleting of ratings separate from song deletion
 
 # Create your views here.
 class UserView(viewsets.ModelViewSet):
@@ -22,17 +18,27 @@ class RatingView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def post(self, request):
+        user = request.data["username"]
         song = request.data["song"]
         artist = request.data["artist"]
-        if not Artist.objects.filter(song=song, artist=artist):
+        artists = Artist.objects.filter(song=song, artist=artist)
+        if not artists:
             new_song = Artist(song=song,artist=artist)
+            song_id = new_song.id
             new_song.save()
-        serial = self.serializer_class(data=request.data)
-        if serial.is_valid():
-            serial.save()
-            return Response({'status': 'Rating created'})
         else:
+            song_id = artists[0].id
+        ratings = Rating.objects.filter(username=user, song_id = song_id)
+        if ratings:
             return Response({'status': 'Song already rated'})
+        else:
+            request.data["song_id"]=song_id
+            serial = self.serializer_class(data=request.data)
+            if serial.is_valid():
+                serial.save()
+                return Response({'status': 'Rating created'})
+            else:
+                return Response({'status': serial.errors})
 
     def put(self, request):
         user = request.data['username']
