@@ -2,7 +2,9 @@
 
 
   import React, { useEffect, useState } from "react";
-  import FlatList from 'flatlist-react';
+  // //make sure to run 'npm install flatlist-react'
+  // import FlatList from 'flatlist-react';
+  import axios from "axios";
 
   export default function Read() {
     // Initially, set isLoading to true and set up the setLoading function for
@@ -17,20 +19,45 @@
     // have one parameter, fetch(), and an empty function body.
     // Note that items in a Django database can be retrieved that way as well.
     // Try it out with Postman.
-    useEffect(() => {
+
+    // rewrite as try catch
+
+    const myFunc = async (event) => {
       // Pass the URL to the fetch API.
-      fetch("http://localhost:8000/api/artists/all-songs/")
-        // Parse the response object and extract the json response that is obtained.
-        .then((response) => response.json())
-        // Set the empty data variable to the fetched data.
-        .then((json) => setData(json))
-        // Catch any errors thrown from the fetch call.
-        .catch((error) => console.error(error))
-        // While the data is loading, show the isLoading view below.
-        // Once setLoading() sets isLoading to false, show the view with the
-        // loaded data.
-        .finally(() => setLoading(false));
+      try {
+        const response = await axios.get("http://localhost:8000/api/artists/")
+        //console.log(response.data);
+        return response.data
+        //setData(response.data)
+        //setLoading(false)
+        // console.log(event)
+        // console.log(data);
+        // console.log(response.data)
+      } catch (err){
+        console.error(err);
+      }
+    }
+
+    useEffect(async () => {
+      var response = await myFunc();
+      console.log(response);
+      setData(response);
+      setLoading(false);
+
+      // axios.get("http://localhost:8000/api/artists/")
+      //   // Parse the response object and extract the json response that is obtained.
+      //   .then((response) => response.data)
+      //   // Set the empty data variable to the fetched data.
+      //   .then((json) => setData(json))
+      //   // Catch any errors thrown from the fetch call.
+      //   .catch((error) => console.error(error))
+      //   // While the data is loading, show the isLoading view below.
+      //   // Once setLoading() sets isLoading to false, show the view with the
+      //   // loaded data.
+      //   .finally(() => setLoading(false));
     }, []);
+
+
 
     return (
       // Now the component parses the data and renders it using a FlatList component.
@@ -57,7 +84,7 @@
                 textAlign: "center",
                 paddingBottom: 10,
               }}
-            >   {data.song}
+            >   {data.artist}
               Artist:
             </p>
             <FlatList
