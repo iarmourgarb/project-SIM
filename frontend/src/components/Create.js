@@ -26,10 +26,12 @@ export default function CreateSong(props) {
 
 
     axios.post('http://localhost:8000/api/ratings/post/', {
-    username: songUsername,
+    user: songUsername,
     artist:songArtist,
     song:songTitle,
-    rating:songRating
+    rating:songRating,
+    song_id:0
+    //user_id:0
   })
   .then(function (response) {
     console.log(response);
