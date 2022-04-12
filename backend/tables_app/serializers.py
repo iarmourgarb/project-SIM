@@ -1,12 +1,19 @@
 from rest_framework import serializers, validators
 from django.db import models
 from django.db.models import Avg
-from .models import User, Artist, Rating
+from django.contrib.auth.models import User
+from .models import Artist, Rating
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('id', 'username', 'password', 'is_active', 'is_authenticated')
+        # extra_kwargs = {'password': {'write_only':True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        user.is_active = True
+        return user
 
 class ArtistSerializer(serializers.ModelSerializer):
     
@@ -26,10 +33,11 @@ class RatingSerializer(serializers.ModelSerializer):
 
     artist = serializers.SerializerMethodField()
     song = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
 
     class Meta:
         model = Rating
-        fields = ('id', 'username', 'song_id', 'song', 'artist', 'rating')
+        fields = ('id','user', 'username', 'song_id', 'song', 'artist', 'rating')
         indexes = [models.Index(fields=["username", "song_id"])]
 
     def get_artist(self, obj):
@@ -39,3 +47,8 @@ class RatingSerializer(serializers.ModelSerializer):
     def get_song(self, obj):
         song = obj.song_id.song
         return song
+
+    def get_username(self, obj):
+        user = obj.user
+        username = user.username
+        return username

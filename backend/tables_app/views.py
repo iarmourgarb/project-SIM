@@ -2,8 +2,10 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
 from .serializers import UserSerializer, RatingSerializer, ArtistSerializer
-from .models import User, Rating, Artist
+from .models import Rating, Artist
+from django.contrib.auth.models import User
 
 # Create, Read, Update, Delete of Rating - DONE / except for some more testing but seems to all be in order
 
@@ -11,6 +13,8 @@ from .models import User, Rating, Artist
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    authentication_classes = (TokenAuthentication,)
+
 
 class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
@@ -18,7 +22,7 @@ class RatingView(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post'])
     def post(self, request):
-        user = request.data["username"]
+        user = request.data["user"]
         song = request.data["song"]
         artist = request.data["artist"]
         artists = Artist.objects.filter(song=song, artist=artist)
@@ -28,7 +32,7 @@ class RatingView(viewsets.ModelViewSet):
             new_song.save()
         else:
             song_id = artists[0].id
-        ratings = Rating.objects.filter(username=user, song_id = song_id)
+        ratings = Rating.objects.filter(user_id=user, song_id = song_id)
         if ratings:
             return Response({'status': 'Song already rated'})
         else:
@@ -41,10 +45,10 @@ class RatingView(viewsets.ModelViewSet):
                 return Response({'status': serial.errors})
 
     def put(self, request):
-        user = request.data['username']
+        user = request.data['user']
         song_id = request.data['song_id']
         rating = request.data['rating']
-        objs = Rating.objects.filter(username=user, song_id=song_id)
+        objs = Rating.objects.filter(user_id=user, song_id=song_id)
         if objs:
             obj = objs[0]
             obj.rating = rating
