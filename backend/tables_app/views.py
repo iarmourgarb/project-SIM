@@ -38,7 +38,10 @@ class RatingView(viewsets.ModelViewSet):
             if ratings:
                 return Response({'status': 'Song already rated'})
             else:
-                # request.data._mutable=True
+                try:
+                    request.data._mutable=True
+                except:
+                    pass
                 request.data["song_id"]=song_id
                 serial = self.serializer_class(data=request.data)
                 if serial.is_valid():
