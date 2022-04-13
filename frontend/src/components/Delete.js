@@ -11,6 +11,7 @@ function DeleteButton(props) {
         onClick={(e) => {
           e.preventDefault();
           axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {});
+          // fetchAllDataToTable({});
         }}
       >
         Delete
