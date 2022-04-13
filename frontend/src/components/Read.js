@@ -93,11 +93,11 @@
                   <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
                   <tbody>
                  {data ? (data.map(el =>
-                  <tr key={el.song_id}>
+                  <tr>
                   <td>{el.song}</td>
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
-                  <td>{DeleteButton(el.song_id)}</td>
+                  <td><DeleteButton deleting={el.id}/></td>
                   <td>Edit</td>
                   </tr>
                 )) : "No songs rated"}
