@@ -41,7 +41,6 @@
     }
 
 
-
     useEffect(async () => {
       var response = await myFunc();
       console.log(response);
@@ -95,6 +94,8 @@
                   <td>{el.song}</td>
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
+                  <td>Delete</td>
+                  <td>Edit</td>
                   </tr>
                 )) : "No songs rated"}
                 </table>
