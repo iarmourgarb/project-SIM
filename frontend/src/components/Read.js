@@ -5,6 +5,8 @@
   // //make sure to run 'npm install flatlist-react'
   //import FlatList from 'flatlist-react';
   import axios from "axios";
+  import DeleteButton from "./Delete";
+  import {Button} from "reactstrap"
 
 
 
@@ -95,7 +97,7 @@
                   <td>{el.song}</td>
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
-                  <td>Delete</td>
+                  <td>{DeleteButton(el.song_id)}</td>
                   <td>Edit</td>
                   </tr>
                 )) : "No songs rated"}
