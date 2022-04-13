@@ -86,7 +86,7 @@
             <div>
                 <ul>
                 {data.map(el => (
-                    <li key={el.song}>{el.artist}>{el.avg_rating}</li>
+                    <li key={el.song}>  {el.song}, {el.artist} -{'>'} {el.avg_rating}</li>
                 ))}
                 </ul>
             </div>
