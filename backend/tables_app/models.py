@@ -14,6 +14,9 @@ class Artist(models.Model):
     song = models.CharField(max_length = 255)
     artist = models.CharField(max_length = 255)
 
+    def __str__(self) -> str:
+        return str(self.id) + self.song + self.artist
+
     def str_song(self):
         return self.song
 
