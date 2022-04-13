@@ -88,9 +88,10 @@
         ) : (
             <div>
                 <table border="1">
-                 <tr><th>Song</th><th>Artist</th><th>Rating</th></tr>
+                  <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
+                  <tbody>
                  {data ? (data.map(el =>
-                  <tr>
+                  <tr key={el.song_id}>
                   <td>{el.song}</td>
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
@@ -98,6 +99,7 @@
                   <td>Edit</td>
                   </tr>
                 )) : "No songs rated"}
+                </tbody>
                 </table>
             </div>
           )}
