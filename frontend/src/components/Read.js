@@ -3,7 +3,7 @@
 
   import React, { useEffect, useState } from "react";
   // //make sure to run 'npm install flatlist-react'
-  import FlatList from 'flatlist-react';
+  //import FlatList from 'flatlist-react';
   import axios from "axios";
 
 
@@ -62,24 +62,24 @@
     }, []);
 
 
-    function displaySongs(data){
-       let table = '<table border="1">';
-       table += `<tr><th>Song</th><th>Artist</th></tr>`;
-       data.forEach((song, index) => {
-           table = table + `<tr>`;
-           table = table + `<td>Title: ${song.song}</td>`;
-           table = table + `<td>Title: ${song.artist}</td>`;
-           // table = table + `<td>Title: ${song.avg_rating}</td>`;
-           table += `</tr>`;
-        });
-        table += "</table>";
-        // console.log("data-list")
-        document.getElementById("data-list").innerHTML = table;
-        // if (data !== null)
-        // {document.getElementById("data-list").innerHTML = table;}
-        // else {document.write("Loading...")}
-    }
-    {displaySongs(data)};
+    // function displaySongs(data){
+    //    let table = '<table border="1">';
+    //    table += `<tr><th>Song</th><th>Artist</th></tr>`;
+    //    data.forEach((song, index) => {
+    //        table = table + `<tr>`;
+    //        table = table + `<td>Title: ${song.song}</td>`;
+    //        table = table + `<td>Title: ${song.artist}</td>`;
+    //        // table = table + `<td>Title: ${song.avg_rating}</td>`;
+    //        table += `</tr>`;
+    //     });
+    //     table += "</table>";
+    //     // console.log("data-list")
+    //     document.getElementById("data-list").innerHTML = table;
+    //     // if (data !== null)
+    //     // {document.getElementById("data-list").innerHTML = table;}
+    //     // else {document.write("Loading...")}
+    // }
+    // {displaySongs(data)};
 
 
     return(
@@ -87,14 +87,21 @@
         {isLoading ? (
             <p>Loading...</p>
         ) : (
+            <div>
+                <table border="1">
+                 <tr><th>Song</th><th>Artist</th><th>Rating</th></tr>
+                 {data ? (data.map(el =>
+                  <tr>
+                  <td>{el.song}</td>
+                  <td>{el.artist}</td>
+                  <td>{el.avg_rating}</td>
+                  </tr>
+                )) : "No songs rated"}
+                </table>
+            </div>
+          )}
 
-            // <div>
-            <div id="movies-list"></div>
 
-            // {displaySongs(data)};
-
-            // </div>
-        )}
         </div>
-    );
+)
 }

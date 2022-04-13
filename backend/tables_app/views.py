@@ -1,3 +1,4 @@
+from wsgiref.util import request_uri
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -20,29 +21,36 @@ class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post', 'get'])
     def post(self, request):
-        user = request.data["user"]
-        song = request.data["song"]
-        artist = request.data["artist"]
-        artists = Artist.objects.filter(song=song, artist=artist)
-        if not artists:
-            new_song = Artist(song=song,artist=artist)
-            song_id = new_song.id
-            new_song.save()
-        else:
-            song_id = artists[0].id
-        ratings = Rating.objects.filter(user_id=user, song_id = song_id)
-        if ratings:
-            return Response({'status': 'Song already rated'})
-        else:
-            request.data["song_id"]=song_id
-            serial = self.serializer_class(data=request.data)
-            if serial.is_valid():
-                serial.save()
-                return Response({'status': 'Rating created'})
+        if request.method == 'POST':
+            user = request.data["user"]
+            song = request.data["song"]
+            artist = request.data["artist"]
+            artists = Artist.objects.filter(song=song, artist=artist)
+            if not artists:
+                new_song = Artist.objects.create(song=song, artist=artist)
+                new_song.save()
+                song_id = new_song.id
             else:
-                return Response({'status': serial.errors})
+                song_id = artists[0].id
+            ratings = Rating.objects.filter(user_id=user, song_id = song_id)
+            if ratings:
+                return Response({'status': 'Song already rated'})
+            else:
+                try:
+                    request.data._mutable=True
+                except:
+                    pass
+                request.data["song_id"]=song_id
+                serial = self.serializer_class(data=request.data)
+                if serial.is_valid():
+                    serial.save()
+                    return Response({'status': 'Rating created'})
+                else:
+                    return Response({'status': serial.errors})
+        else:
+            return Response({'status': 'working'})
 
     def put(self, request):
         user = request.data['user']
