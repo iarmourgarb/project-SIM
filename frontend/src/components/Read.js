@@ -6,6 +6,8 @@
   import FlatList from 'flatlist-react';
   import axios from "axios";
 
+
+
   export default function Read() {
     // Initially, set isLoading to true and set up the setLoading function for
     // later changing the isLoading value.
@@ -38,6 +40,8 @@
       }
     }
 
+
+
     useEffect(async () => {
       var response = await myFunc();
       console.log(response);
@@ -57,6 +61,7 @@
       //   .finally(() => setLoading(false));
     }, []);
 
+
     function displaySongs(data){
        let table = '<table border="1">';
        table += `<tr><th>Song</th><th>Artist</th></tr>`;
@@ -68,13 +73,14 @@
            table += `</tr>`;
         });
         table += "</table>";
-        console.log("data-list")
+        // console.log("data-list")
         document.getElementById("data-list").innerHTML = table;
         // if (data !== null)
         // {document.getElementById("data-list").innerHTML = table;}
         // else {document.write("Loading...")}
     }
     {displaySongs(data)};
+
 
     return(
         <div>
