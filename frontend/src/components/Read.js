@@ -18,6 +18,7 @@
     // Initially, set data to an empty array and set up the setData function for
     // later changing the data value to the fetched data.
     const [data, setData] = useState([]);
+    const [deleted, setDeleted] = useState(false)
 
     // The useEffect hook is similar to the componentDidMount and
     // componentDidUpdate in class components. For our anonymoust function, we will

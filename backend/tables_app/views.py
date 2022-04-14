@@ -52,18 +52,27 @@ class RatingView(viewsets.ModelViewSet):
         else:
             return Response({'status': 'working'})
 
-    def put(self, request):
+    @action(detail=False, methods=['post'])
+    def find(self, request):
         user = request.data['user']
-        song_id = request.data['song_id']
-        rating = request.data['rating']
-        objs = Rating.objects.filter(user_id=user, song_id=song_id)
-        if objs:
-            obj = objs[0]
-            obj.rating = rating
-            obj.save()
-            return Response({'status': "Rating updated"})
+        song = request.data['song_id']
+        ratings = Rating.objects.filter(user=user, song_id=song)
+        if ratings:
+            rating = ratings[0]
+            id = rating.id
+            rate = rating.rating
+            return Response({'status': 'Rating found', 'id': id, 'rating': rate})
         else:
-            return Response({'status': 'No rating to update'})
+            return Response({'status': 'No rating exists'})
+
+    def put(self, request):
+        id = request.data['id']
+        rating = request.data['rating']
+        obj = Rating.objects.filter(id=id)[0]
+        obj.rating = rating
+        obj.save()
+        return Response({'status': "Rating updated"})
+        
         
 
 class ArtistView(viewsets.ModelViewSet):
