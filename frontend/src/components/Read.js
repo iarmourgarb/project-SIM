@@ -83,6 +83,25 @@
     // }
     // {displaySongs(data)};
 
+    // const fetchAllDataToTable(async () => {
+    //   var response = await myFunc();
+    //   console.log(response);
+    //   setData(response);
+    //   setLoading(false);
+
+      // axios.get("http://localhost:8000/api/artists/")
+      //   // Parse the response object and extract the json response that is obtained.
+      //   .then((response) => response.data)
+      //   // Set the empty data variable to the fetched data.
+      //   .then((json) => setData(json))
+      //   // Catch any errors thrown from the fetch call.
+      //   .catch((error) => console.error(error))
+      //   // While the data is loading, show the isLoading view below.
+      //   // Once setLoading() sets isLoading to false, show the view with the
+      //   // loaded data.
+      //   .finally(() => setLoading(false));
+    // }, []);
+
 
     return(
         <div>
