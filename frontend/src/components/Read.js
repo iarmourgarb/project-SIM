@@ -8,7 +8,7 @@
   import DeleteButton from "./Delete";
   import {Button} from "reactstrap"
 
-
+// instead of headers maybe use the state variable
 
   export default function Read() {
     // Initially, set isLoading to true and set up the setLoading function for
@@ -18,6 +18,9 @@
     // later changing the data value to the fetched data.
     const [data, setData] = useState([]);
     const [deleted, setDeleted] = useState(false)
+    const [isTrue, setIstrue] = useState(false)
+    const [edited, setEdited] = useState("<div></div>")
+
 
     // The useEffect hook is similar to the componentDidMount and
     // componentDidUpdate in class components. For our anonymoust function, we will
@@ -43,6 +46,10 @@
       }
     }
 
+    var myComp = "<div></div>";
+
+
+    // myComp = "in my on click function
 
     useEffect(async () => {
       var response = await myFunc();
@@ -99,15 +106,61 @@
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
                   <td><DeleteButton deleting={el.id}/></td>
-                  <td>Edit</td>
+                  <td><EditButton song={el} setIsTrue={setIsTrue}/></td>
                   </tr>
                 )) : "No songs rated"}
                 </tbody>
                 </table>
+            </div>
+            {edited}
+
+            <Edit isTrue = {isTrue}>
+            <div>
+            "No songs rated"
+            </div>
             </div>
           )}
 
 
         </div>
 )
+
+function EditButton(props) {
+  return (
+    // <div className="content">
+    <div>
+      <button
+        // className="button"
+        onClick={(e) => {
+          e.preventDefault();
+          const req =  axios.post("http://localhost:8000/api/rating/find/", {
+            user : 1,
+            song_id : props.song.id,
+            rating : 0,
+          })
+
+          .then(function(req){
+            // how do I show this componenet?
+          // set a loading value?
+            // reset component to show to tru
+            // setEdited(true)
+            // add something that loads the edit component
+          })
+
+          // .catch(error){
+          //   console.log(error)
+          // }
+
+          // "status","id","rating"
+        }}
+
+      >
+        Edit
+      </button>
+      {/* </a> */}
+    </div>
+  );
+}
+
+
 }

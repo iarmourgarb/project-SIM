@@ -9,20 +9,21 @@ function EditButton(props) {
       <button
         // className="button"
         onClick={(e) => {
+          props.setIsTrue(true);
           e.preventDefault();
           const req =  axios.post("http://localhost:8000/api/rating/find/", {
-            user : "",
-            song_id : props.song_id,
+            user : 1,
+            song_id : props.song.id,
             rating : 0,
-          });
+          })
 
-          // .then(function(req){
-          //   // how do I show this componenet?
+          .then(function(req){
+            // how do I show this componenet?
           // set a loading value?
-          //   // reset component to show to true
-          //   <Edit>
-          //
-          // })
+            // reset component to show to tru
+            // setEdit(true)
+
+          })
 
           // .catch(error){
           //   console.log(error)
