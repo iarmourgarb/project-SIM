@@ -1,7 +1,7 @@
 // The component will print out the list of all the songs in the database with their ratings
 
 
-  import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCookie } from "react";
   // //make sure to run 'npm install flatlist-react'
   //import FlatList from 'flatlist-react';
   import axios from "axios";
@@ -18,7 +18,7 @@
     // later changing the data value to the fetched data.
     const [data, setData] = useState([]);
     const [deleted, setDeleted] = useState(false)
-    const [isTrue, setIstrue] = useState(false)
+    const [isTrue, setIsTrue] = useState(false)
     const [edited, setEdited] = useState("<div></div>")
 
 
@@ -92,6 +92,7 @@
 
 
     return(
+      <div>
         <div>
         {isLoading ? (
             <p>Loading...</p>
@@ -112,16 +113,13 @@
                 </tbody>
                 </table>
             </div>
-            {edited}
 
-            <Edit isTrue = {isTrue}>
-            <div>
-            "No songs rated"
-            </div>
-            </div>
           )}
+          {edited ? (<div></div>) : ("HAASDASDASDASDAS")}
 
 
+
+        </div>
         </div>
 )
 
