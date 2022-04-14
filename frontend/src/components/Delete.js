@@ -10,9 +10,9 @@ function DeleteButton(props) {
         // className="button"
         onClick={(e) => {
           e.preventDefault();
-          axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {});
-          // fetchAllDataToTable({});
+          const req =  axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {}).then(function(response){window.location.reload(true)})
         }}
+
       >
         Delete
       </button>
