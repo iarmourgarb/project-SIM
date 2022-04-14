@@ -9,7 +9,7 @@ import Read from "./Components/Read"
 
 export default function LogIn(props) {
   const [userUsername, setUserUsername] = useState("")
-  const [userPassword, setUSerPassword] = useState("")
+  const [userPassword, setUserPassword] = useState("")
   const handleSubmit = (formData) => {
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     console.log("submitted")

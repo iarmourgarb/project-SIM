@@ -6,6 +6,7 @@
   //import FlatList from 'flatlist-react';
   import axios from "axios";
   import DeleteButton from "./Delete";
+  import EditButton from "./EditButton";
   import {Button} from "reactstrap"
 
 
@@ -107,6 +108,7 @@
         {isLoading ? (
             <p>Loading...</p>
         ) : (
+          <div>
             <div>
                 <table border="1">
                   <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
@@ -117,15 +119,19 @@
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
                   <td><DeleteButton deleting={el.id}/></td>
-                  <td>Edit</td>
+                  <td><EditButton song_id={el.id}/></td>
                   </tr>
                 )) : "No songs rated"}
                 </tbody>
                 </table>
             </div>
+
+            <div>
+            "No songs rated"
+            </div>
+            </div>
           )}
-
-
         </div>
+
 )
 }
