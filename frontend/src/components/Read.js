@@ -6,7 +6,6 @@
   //import FlatList from 'flatlist-react';
   import axios from "axios";
   import DeleteButton from "./Delete";
-  import EditButton from "./EditButton";
   import {Button} from "reactstrap"
 
 
@@ -84,32 +83,12 @@
     // }
     // {displaySongs(data)};
 
-    // const fetchAllDataToTable(async () => {
-    //   var response = await myFunc();
-    //   console.log(response);
-    //   setData(response);
-    //   setLoading(false);
-
-      // axios.get("http://localhost:8000/api/artists/")
-      //   // Parse the response object and extract the json response that is obtained.
-      //   .then((response) => response.data)
-      //   // Set the empty data variable to the fetched data.
-      //   .then((json) => setData(json))
-      //   // Catch any errors thrown from the fetch call.
-      //   .catch((error) => console.error(error))
-      //   // While the data is loading, show the isLoading view below.
-      //   // Once setLoading() sets isLoading to false, show the view with the
-      //   // loaded data.
-      //   .finally(() => setLoading(false));
-    // }, []);
-
 
     return(
         <div>
         {isLoading ? (
             <p>Loading...</p>
         ) : (
-          <div>
             <div>
                 <table border="1">
                   <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
@@ -120,19 +99,15 @@
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
                   <td><DeleteButton deleting={el.id}/></td>
-                  <td><EditButton song_id={el.id}/></td>
+                  <td>Edit</td>
                   </tr>
                 )) : "No songs rated"}
                 </tbody>
                 </table>
             </div>
-
-            <div>
-            "No songs rated"
-            </div>
-            </div>
           )}
-        </div>
 
+
+        </div>
 )
 }

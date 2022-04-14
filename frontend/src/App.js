@@ -11,7 +11,7 @@ import LogIn from "./components/Login";
 
 
 function App() {
-
+  const [state, setState] = useState("not_auth");
   // handleSubmit = (formData) => {
   //   // make axios request to mybackend.com/newSong, with context of username=songUsername
   //   axios.post('localhostadsads/createSong', {
@@ -27,13 +27,13 @@ function App() {
   return (
   //   <CreateSong handleSubmit={handleSubmit}/>
     <div>
-
-    //this state needs to be the one from Login.js
-    //passed thru props
+      <LogIn />
+{/* <Create/><Read/>   */}
+    {/* //passed thru props
     {state === 'not_auth' && (
         <LogIn logIn={() => setState('logged-in') } />
       )}
-    {state === 'logged-in' && <Create/> && <Read/>}
+    {state === 'logged-in' && <Create/> && <Read/>} */}
     </div>
     // <div className="App">
     //   <header className="App-header">

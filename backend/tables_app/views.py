@@ -32,7 +32,7 @@ class UserView(viewsets.ModelViewSet):
 class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     @action(detail=False, methods=['post', 'get'])
     def post(self, request):
@@ -91,7 +91,7 @@ class RatingView(viewsets.ModelViewSet):
 class ArtistView(viewsets.ModelViewSet):
     serializer_class = ArtistSerializer
     queryset = Artist.objects.all()
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
     def put(self, request):

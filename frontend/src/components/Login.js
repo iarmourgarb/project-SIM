@@ -15,24 +15,65 @@ export default function LogIn(props) {
 
 //need to link this state to App.js
 //pass thru props
-  const [state, setState] = useState('not_auth')
+  const [state, setState] = useState('not_auth');
+  const [userUsername, setUserUsername] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userIDToken, setUserIDToken] = useCookie('token', '0');
+  const [userToken, setUserToken] = useCookie('username', '');
+  // (async () => {
+  //   // POST request using axios with async/await
+  //   const element = document.querySelector('#post-request-async-await .article-id');
+  //   const article = { title: 'Axios POST Request Example' };
+  //   const response = await axios.post('https://reqres.in/api/articles', article);
+  //   element.innerHTML = response.data.token;
+// })()
 
-  const [userUsername, setUserUsername] = useState("")
-  const [userPassword, setUserPassword] = useState("")
-  const [userToken, setUserToken] = useCookie('token', '0');
-  const handleSubmit = async (formData) => {
-     axios.post('http://localhost:8000/auth/', {username: userUsername, password: userPassword})
-     .then((response) => {console.log("ASDASDASDAS"); setUserToken('bye'); setState('logged-in')})
-     .catch((error) => console.log("akusdgasliuydgsahjlgh"));
+async function myReq(details) {
+      // Pass the URL to the fetch API.
+      // setUserToken("3");
+      try {
+        const response = await axios.post("http://localhost:8000/api/auth/", details);
+        return response.data;
+      } catch (err){
+      }
+    };
+
+
+const handleSubmit = async (evt) => {
+    const details = {username: userUsername, password: userPassword};
+    var response = await myReq(details);
+      console.log(response);
+      setUserIDToken(response.token);
+      setUserToken(response.user);
+  };
+
+
+  return <form onSubmit={handleSubmit} action='#'><label>
+      Username:
+      <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
+     </label>
+     <label>
+       Password:
+       <input type="text" value={userPassword} onChange={e => setUserPassword(e.target.value)} />
+     </label><input type="submit" value="Submit"></input>
+     </form>
+
+
+
+  // const handleSubmit = async (formData) => {
+  //    res = axios.post('http://127.0.0.1:8000/api/auth/', {username: userUsername, password: userPassword})
+  //    .then((res) => setUserToken("test"));
+  //    setUserToken(res.data.token)
+    //  .catch((error) => ("akusdgasliuydgsahjlgh"));
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     // try{
     // console.log("submitted")
-    //
-    // const res = await axios.post('http://localhost:8000/auth/', {
-    //   username: userUsername,
-    //   password: userPassword,
+    
+    // axios.post('http://localhost:8000/api/auth/', {
+      // username: userUsername,
+      // password: userPassword,
     // });
-    // setUserToken("hi")}
+    // setUserToken(response.data.token);
     // catch(err){
     //     console.error(err)
     // }
@@ -48,23 +89,24 @@ export default function LogIn(props) {
   //   user_id: userUsername,
   //   password: userPassword,
   // }
-};
+// };
 
-return (
-  <div>
-  <form onSubmit={handleSubmit}>
-    <label>
-      Username:
-      <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
-    </label>
-    <label>
-      Password:
-      <input type="text" value={userPassword} onChange={e => setUserPassword(e.target.value)} />
-    </label>
-    <input type="submit" value="Submit" />
-  </form>
-  </div>
-);
+
+// return (
+//   <div>
+//   <form onSubmit={handleSubmit}>
+//     <label>
+//       Username:
+//       <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
+//     </label>
+//     <label>
+//       Password:
+//       <input type="text" value={userPassword} onChange={e => setUserPassword(e.target.value)} />
+//     </label>
+//     <input type="submit" value="Submit" />
+//   </form>
+//   </div>
+// );
 
 // res.status; // 200  unsure here, maybe res.refresh can be used in the delete?
 
