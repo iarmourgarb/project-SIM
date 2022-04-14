@@ -11,7 +11,7 @@ import LogIn from "./components/Login";
 
 
 function App() {
-  const [state, setState] = useState("not_auth");
+    const [userState,setUserState] = useState('not_auth');
   // handleSubmit = (formData) => {
   //   // make axios request to mybackend.com/newSong, with context of username=songUsername
   //   axios.post('localhostadsads/createSong', {
@@ -25,9 +25,18 @@ function App() {
   //   console.log(error);
   // });
   return (
-  //   <CreateSong handleSubmit={handleSubmit}/>
     <div>
-      <LogIn />
+    {userState == "logged-in"?
+    <div>
+            <Create />
+            <Read/>
+            </div>
+          :
+            <LogIn setUserState={setUserState}/>
+          }
+    
+
+
 {/* <Create/><Read/>   */}
     {/* //passed thru props
     {state === 'not_auth' && (

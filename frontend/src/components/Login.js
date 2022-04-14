@@ -15,7 +15,6 @@ export default function LogIn(props) {
 
 //need to link this state to App.js
 //pass thru props
-  const [state, setState] = useState('not_auth');
   const [userUsername, setUserUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userIDToken, setUserIDToken] = useCookie('token', '0');
@@ -43,6 +42,7 @@ const handleSubmit = async (evt) => {
     const details = {username: userUsername, password: userPassword};
     var response = await myReq(details);
       console.log(response);
+      props.setUserState("logged-in")
       setUserIDToken(response.token);
       setUserToken(response.user);
   };
@@ -68,7 +68,7 @@ const handleSubmit = async (evt) => {
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     // try{
     // console.log("submitted")
-    
+
     // axios.post('http://localhost:8000/api/auth/', {
       // username: userUsername,
       // password: userPassword,
