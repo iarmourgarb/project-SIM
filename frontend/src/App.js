@@ -1,13 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState, useBetween } from "react";
 import Create from "./components/Create";
 import CreateSong from "./components/Create";
 import Read from "./components/Read";
+import Login from "./components/Login";
+import LogIn from "./components/Login";
+
+
 
 function App() {
-
+  const [state, setState] = useState("not_auth");
   // handleSubmit = (formData) => {
   //   // make axios request to mybackend.com/newSong, with context of username=songUsername
   //   axios.post('localhostadsads/createSong', {
@@ -23,8 +27,13 @@ function App() {
   return (
   //   <CreateSong handleSubmit={handleSubmit}/>
     <div>
-      <CreateSong/>
-      <Read/>
+      <LogIn />
+{/* <Create/><Read/>   */}
+    {/* //passed thru props
+    {state === 'not_auth' && (
+        <LogIn logIn={() => setState('logged-in') } />
+      )}
+    {state === 'logged-in' && <Create/> && <Read/>} */}
     </div>
     // <div className="App">
     //   <header className="App-header">
