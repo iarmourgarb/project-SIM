@@ -31,7 +31,8 @@ async function myReq(details) {
       // Pass the URL to the fetch API.
       // setUserToken("3");
       try {
-        const response = await axios.post("http://localhost:8000/api/auth/", details);
+        const response = await axios.post("http://localhost:8000/api/auth/", details).then(props.setUserState("logged-in"))
+
         return response.data;
       } catch (err){
       }
@@ -42,7 +43,7 @@ const handleSubmit = async (evt) => {
     const details = {username: userUsername, password: userPassword};
     var response = await myReq(details);
       console.log(response);
-      props.setUserState("logged-in")
+      console.log("SETTING USER STATE ZTO LOGGED IN");
       setUserIDToken(response.token);
       setUserToken(response.user);
   };
