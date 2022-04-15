@@ -9,6 +9,7 @@ import React, { useEffect, useState, useCookie} from "react";
   import {Button} from "reactstrap";
   import Edit from "./Edit";
   import {getCookie} from "react-use-cookie";
+  import '../Form.css'
 
 
 // instead of headers maybe use the state variable
@@ -63,7 +64,7 @@ import React, { useEffect, useState, useCookie} from "react";
             <p>Loading...</p>
         ) : (
             <div>
-                <table border="1">
+                <table border="1" class = form-box>
                   <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
                   <tbody>
                  {data ? (data.map(el =>

@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import './Form.css'
 import axios from "axios";
 import React, { useEffect, useState, useBetween, useCookie } from "react";
 import Create from "./components/Create";
@@ -23,13 +24,17 @@ function App() {
     {userState == "logged-in" ?
 
         <div>
+        <br></br><br></br>
             <Create/>
+        <br></br><br></br>
             <Read setUserState={userState}/>
         </div>
 
           :
           <div>
+          <br></br><br></br><br></br>
              <LogIn setUserState={setUserState}/>
+          <br></br><br></br><br></br>
               <NewUser/>
           </div>
 

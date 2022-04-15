@@ -6,7 +6,7 @@ import DeleteButton from "./Delete";
 import {Button} from "reactstrap";
 import Read from "./Read";
 import useCookie from "react-use-cookie";
-
+import '../Form.css'
 
 
 // Landing page will be passed into App.js
@@ -44,7 +44,7 @@ const handleSubmit = async (evt) => {
   };
 
 
-  return <form onSubmit={handleSubmit} action='#'><label>
+  return <form onSubmit={handleSubmit} action='#' class = form-box><label>
       Username:
       <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
      </label>

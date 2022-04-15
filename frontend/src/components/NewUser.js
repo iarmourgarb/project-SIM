@@ -4,7 +4,7 @@ import DeleteButton from "./Delete";
 import {Button} from "reactstrap";
 import Read from "./Read";
 import useCookie from "react-use-cookie";
-
+import '../Form.css'
 
 export default function AddUser(props) {
 
@@ -29,7 +29,7 @@ const handleSubmit = (formData) => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} class = form-box>
       <label>
         Username:
         <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
