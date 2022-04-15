@@ -20,22 +20,13 @@ export default function LogIn(props) {
   const [userIDToken, setUserIDToken] = useCookie('token', '0');
   const [userToken, setUserToken] = useCookie('username', '');
 
-  // (async () => {
-  //   // POST request using axios with async/await
-  //   const element = document.querySelector('#post-request-async-await .article-id');
-  //   const article = { title: 'Axios POST Request Example' };
-  //   const response = await axios.post('https://reqres.in/api/articles', article);
-  //   element.innerHTML = response.data.token;
-// })()
 
 async function myReq(details) {
-      // Pass the URL to the fetch API.
-      // setUserToken("3");
       try {
-        const response = await axios.post("http://localhost:8000/api/auth/", details).then(props.setUserState("logged-in"))
+        const response = await axios.post("http://localhost:8000/api/auth/", details).then(props.setUserState("logged-in"));
 
         return response.data;
-      } catch (err){
+      } catch (err){console.log("oops")
       }
     };
 
@@ -45,8 +36,11 @@ const handleSubmit = async (evt) => {
     var response = await myReq(details);
       console.log(response);
       console.log("SETTING USER STATE ZTO LOGGED IN");
+      try {
       setUserIDToken(response.token);
-      props.setUserToken(response.user);
+      setUserToken(response.user); }
+      catch(err) {}
+
   };
 
 
