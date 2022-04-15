@@ -11,6 +11,7 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import {getCookie} from "react-use-cookie";
 
 // This form will be for adding a song with a writing into the database
 
@@ -24,13 +25,18 @@ export default function CreateSong(props) {
     console.log("submitted")
 
     axios.post('http://localhost:8000/api/ratings/post/', {
-      user: songUsername,
-      song_id:0,
-      song:songTitle,
-      artist:songArtist,
-      rating:songRating,
+      user: getCookie("user"),
+      song_id:0,
+      song:songTitle,
+      artist:songArtist,
+      rating:songRating,
+    }, {
+  headers: {
+  Authorization: 'token ' + getCookie('token')
+  }
+}
+)
       //user_id:0
-    })
     .then(function (response) {
       console.log(response);
     })
@@ -41,10 +47,6 @@ export default function CreateSong(props) {
   return (
     <div>
     <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="number" value={songUsername} onChange={e => setSongUsername(e.target.value)}/>
-      </label>
       <label>
         Song Title:
         <input type="text" value={songTitle} onChange={e => setSongTitle(e.target.value)} />

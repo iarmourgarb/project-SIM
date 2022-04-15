@@ -15,7 +15,11 @@ function EditButton(props) {
             user : 1,
             song_id : props.song.id,
             rating : 0,
-          })
+          }, {
+  headers: {
+  Authorization: 'token ' + getCookie('token')
+  }
+})
 
           .then(function(req){
             // how do I show this componenet?

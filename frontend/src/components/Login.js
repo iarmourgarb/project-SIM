@@ -18,7 +18,7 @@ export default function LogIn(props) {
   const [userUsername, setUserUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userIDToken, setUserIDToken] = useCookie('token', '0');
-  const [userToken, setUserToken] = useCookie('username', '');
+  const [userToken, setUserToken] = useCookie('user', '');
 
 
 async function myReq(details) {

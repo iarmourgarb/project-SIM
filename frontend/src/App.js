@@ -24,7 +24,7 @@ function App() {
 
         <div>
             <Create/>
-            <Read/>
+            <Read setUserState={userState}/>
         </div>
 
           :

@@ -21,7 +21,11 @@ export default function DeleteSong(props) {
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     console.log("submitted")
 
-    axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {})
+    axios.delete('http://localhost:8000/api/artists/' + props.deleting + "/", {}, {
+  headers: {
+  Authorization: 'token ' + getCookie('token')
+  }
+})
 
     .then(function (response) {
       console.log(response);

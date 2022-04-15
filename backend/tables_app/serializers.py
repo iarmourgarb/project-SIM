@@ -17,7 +17,7 @@ class CustomAuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
-            'user': user.username,
+            'user': user.id,
         })
 
 class UserSerializer(serializers.ModelSerializer):
@@ -32,14 +32,14 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class ArtistSerializer(serializers.ModelSerializer):
-    
+
     avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = Artist
         fields = ('id', 'song', 'artist', 'avg_rating')
         indexes = [models.Index(fields=["song", "artist"])]
 
-    
+
     def get_avg_rating(self, obj):
         song_id = obj.id
         ratings = Rating.objects.filter(song_id=song_id).aggregate(Avg('rating'))

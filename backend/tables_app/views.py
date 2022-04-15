@@ -85,8 +85,8 @@ class RatingView(viewsets.ModelViewSet):
         obj.rating = rating
         obj.save()
         return Response({'status': "Rating updated"})
-        
-        
+
+
 
 class ArtistView(viewsets.ModelViewSet):
     serializer_class = ArtistSerializer
