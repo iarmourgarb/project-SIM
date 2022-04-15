@@ -34,7 +34,7 @@ export default function CreateSong(props) {
       rating:songRating,
     }, {
   headers: {
-  Authorization: 'token ' + getCookie('token')
+  Authorization: 'Token ' + getCookie('token')
   }
 }
 )
@@ -48,7 +48,7 @@ export default function CreateSong(props) {
 
   return (
     <div>
-    <form onSubmit={handleSubmit} class = form-box>
+    <form onSubmit={handleSubmit} className = "form-box">
       <label>
         Song Title:
         <input type="text" value={songTitle} onChange={e => setSongTitle(e.target.value)} />

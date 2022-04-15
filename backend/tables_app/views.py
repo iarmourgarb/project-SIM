@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .serializers import UserSerializer, RatingSerializer, ArtistSerializer
 from .models import Rating, Artist
 from django.contrib.auth.models import User
@@ -32,7 +32,7 @@ class UserView(viewsets.ModelViewSet):
 class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     @action(detail=False, methods=['post', 'get'])
     def post(self, request):
@@ -91,7 +91,7 @@ class RatingView(viewsets.ModelViewSet):
 class ArtistView(viewsets.ModelViewSet):
     serializer_class = ArtistSerializer
     queryset = Artist.objects.all()
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
     def put(self, request):

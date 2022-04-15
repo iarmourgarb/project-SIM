@@ -37,8 +37,8 @@ import React, { useEffect, useState, useCookie} from "react";
     const myFunc = async (event) => {
       // Pass the URL to the fetch API.
       try {
-        const response = await axios.get('http://localhost:8000/api/artists/', {}, {headers:{
-          Authorization: 'token ' + getCookie('token')
+        const response = await axios.get('http://localhost:8000/api/artists/', {headers:{
+          Authorization: 'token' + getCookie('token')
   } });
         console.log(response.data)
         console.log("response.data above")
@@ -64,7 +64,7 @@ import React, { useEffect, useState, useCookie} from "react";
             <p>Loading...</p>
         ) : (
             <div>
-                <table border="1" class = form-box>
+                <table border="1" className = "form-box">
                   <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
                   <tbody>
                  {data ? (data.map(el =>

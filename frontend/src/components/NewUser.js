@@ -18,7 +18,6 @@ const handleSubmit = (formData) => {
   axios.post('http://localhost:8000/api/users/', {
     username: userUsername,
     password: userPassword,
-    is_active: true,
   })
   .then(function (response) {
     console.log(response);
@@ -29,7 +28,7 @@ const handleSubmit = (formData) => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit} class = form-box>
+    <form onSubmit={handleSubmit} className = "form-box">
       <label>
         Username:
         <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>

@@ -26,9 +26,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'password', 'is_active', 'is_authenticated')
         # extra_kwargs = {'password': {'write_only':True}}
 
+    
+    
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         user.is_active = True
+        user.save()
         return user
 
 class ArtistSerializer(serializers.ModelSerializer):

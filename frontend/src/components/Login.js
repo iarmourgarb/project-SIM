@@ -44,7 +44,7 @@ const handleSubmit = async (evt) => {
   };
 
 
-  return <form onSubmit={handleSubmit} action='#' class = form-box><label>
+  return <form onSubmit={handleSubmit} action='#' className = "form-box"><label>
       Username:
       <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
      </label>

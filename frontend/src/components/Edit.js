@@ -6,13 +6,15 @@ function deleteMe(props) {
   const req =  axios.post("http://localhost:8000/api/ratings/find/", {
     user : getCookie("user"),
     song_id : props.song.id
-  })
+  }, {
+      headers: {
+        Authorization: 'token ' + getCookie('token')
+      }})
 
   .then(function(response){
     console.log(response)
 
-    const req2 = axios.delete("http://localhost:8000/api/ratings/" + response.data.id +'/', {
-    id:response.data.id}, {
+  const req2 = axios.delete("http://localhost:8000/api/ratings/" + response.data.id +'/', {
   headers: {
     Authorization: 'token ' + getCookie('token')
   }
@@ -28,7 +30,10 @@ export default function Edit(props) {
   const req =  axios.post("http://localhost:8000/api/ratings/find/", {
     user : getCookie("user"),
     song_id : props.song.id
-  })
+  },{
+      headers: {
+        Authorization: 'token ' + getCookie('token')
+      }})
 
   .then(async function(response){
     console.log(response)
@@ -39,7 +44,10 @@ export default function Edit(props) {
     rating:rating,
     user:getCookie("user")
 
-  })}) ;};
+  },{
+      headers: {
+        Authorization: 'token ' + getCookie('token')
+      }})}) ;};
 
   return (
     <div>
