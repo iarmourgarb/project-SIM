@@ -37,8 +37,3 @@ python3 manage.py migrate
 
 python3 manage.py runserver
 
-
-
-note: authentication is mostly implemented but is causing an error, so some lines are commented out.
-      uncomment lines 35 and 94 in backend/tables_app/views.py to view that functionality.
-      we are getting a 401 error, so we believe it is on the backend.
