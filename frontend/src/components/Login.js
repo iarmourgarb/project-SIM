@@ -19,6 +19,7 @@ export default function LogIn(props) {
   const [userPassword, setUserPassword] = useState("");
   const [userIDToken, setUserIDToken] = useCookie('token', '0');
   const [userToken, setUserToken] = useCookie('username', '');
+
   // (async () => {
   //   // POST request using axios with async/await
   //   const element = document.querySelector('#post-request-async-await .article-id');
@@ -45,7 +46,7 @@ const handleSubmit = async (evt) => {
       console.log(response);
       console.log("SETTING USER STATE ZTO LOGGED IN");
       setUserIDToken(response.token);
-      setUserToken(response.user);
+      props.setUserToken(response.user);
   };
 
 

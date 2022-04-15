@@ -8,7 +8,7 @@ export default function Edit(props) {
   const handleSubmit = (formData) => {
 
   const req =  axios.post("http://localhost:8000/api/rating/find/", {
-    user : props.userToken,
+    user : useCookie(["username"]),
     song_id : props.song.id
   })
 
