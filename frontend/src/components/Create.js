@@ -22,7 +22,7 @@ export default function CreateSong(props) {
   const handleSubmit = (formData) => {
     // make axios request to mybackend.com/newSong, with context of username=songUsername
     console.log("submitted")
-    
+
     axios.post('http://localhost:8000/api/ratings/post/', {
       user: songUsername,
       song_id:0,
@@ -37,7 +37,7 @@ export default function CreateSong(props) {
     .catch(function (error) {
       console.log(error);
     });};
-    
+
   return (
     <div>
     <form onSubmit={handleSubmit}>
