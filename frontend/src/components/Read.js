@@ -6,7 +6,8 @@ import React, { useEffect, useState, useCookie } from "react";
   //import FlatList from 'flatlist-react';
   import axios from "axios";
   import DeleteButton from "./Delete";
-  import {Button} from "reactstrap"
+  import {Button} from "reactstrap";
+  import Edit from "./Edit";
 
 // instead of headers maybe use the state variable
 
@@ -46,7 +47,7 @@ import React, { useEffect, useState, useCookie } from "react";
       }
     }
 
-    var myComp = "<div></div>";
+    // var myComp = "<div></div>";
 
 
     // myComp = "in my on click function
@@ -71,24 +72,6 @@ import React, { useEffect, useState, useCookie } from "react";
     }, []);
 
 
-    // function displaySongs(data){
-    //    let table = '<table border="1">';
-    //    table += `<tr><th>Song</th><th>Artist</th></tr>`;
-    //    data.forEach((song, index) => {
-    //        table = table + `<tr>`;
-    //        table = table + `<td>Title: ${song.song}</td>`;
-    //        table = table + `<td>Title: ${song.artist}</td>`;
-    //        // table = table + `<td>Title: ${song.avg_rating}</td>`;
-    //        table += `</tr>`;
-    //     });
-    //     table += "</table>";
-    //     // console.log("data-list")
-    //     document.getElementById("data-list").innerHTML = table;
-    //     // if (data !== null)
-    //     // {document.getElementById("data-list").innerHTML = table;}
-    //     // else {document.write("Loading...")}
-    // }
-    // {displaySongs(data)};
 
 
     return(
@@ -107,7 +90,7 @@ import React, { useEffect, useState, useCookie } from "react";
                   <td>{el.artist}</td>
                   <td>{el.avg_rating}</td>
                   <td><DeleteButton deleting={el.id}/></td>
-                  <td><EditButton song={el} setIsTrue={setIsTrue}/></td>
+                  <td><Edit song={el} setIsTrue={isTrue} userToken = {userToken}/></td>
                   </tr>
                 )) : "No songs rated"}
                 </tbody>
@@ -115,50 +98,10 @@ import React, { useEffect, useState, useCookie } from "react";
             </div>
 
           )}
-          {edited ? (<div></div>) : ("HAASDASDASDASDAS")}
-
-
 
         </div>
         </div>
 )
-
-function EditButton(props) {
-  return (
-    // <div className="content">
-    <div>
-      <button
-        // className="button"
-        onClick={(e) => {
-          e.preventDefault();
-          const req =  axios.post("http://localhost:8000/api/rating/find/", {
-            user : 1,
-            song_id : props.song.id,
-            rating : 0,
-          })
-
-          .then(function(req){
-            // how do I show this componenet?
-          // set a loading value?
-            // reset component to show to tru
-            // setEdited(true)
-            // add something that loads the edit component
-          })
-
-          // .catch(error){
-          //   console.log(error)
-          // }
-
-          // "status","id","rating"
-        }}
-
-      >
-        Edit
-      </button>
-      {/* </a> */}
-    </div>
-  );
-}
 
 
 }

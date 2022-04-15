@@ -10,7 +10,8 @@ function DeleteButton(props) {
         // className="button"
         onClick={(e) => {
           e.preventDefault();
-          const req =  axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {}).then(function(response){window.location.reload(true)})
+          const req =  axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {}).then(function(response){window.location.reload(false);
+          props.setUserState("logged-in")})
         }}
 
       >
