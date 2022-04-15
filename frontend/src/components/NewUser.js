@@ -6,43 +6,42 @@ import Read from "./Read";
 import useCookie from "react-use-cookie";
 
 
-export default function NewUser(props) {
+export default function AddUser(props) {
 
   const [userUsername, setUserUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [userIDToken, setUserIDToken] = useCookie('token', '0');
-  const [userToken, setUserToken] = useCookie('username', '');
 
-async function myReq(details) {
+const handleSubmit = (formData) => {
+  // make axios request to mybackend.com/newSong, with context of username=songUsername
+  console.log("submitted new user")
 
-      try {
-        const response = await axios.post("http://localhost:8000/api/auth/", details).then(props.setUserState("logged-in"))
+  axios.post('http://localhost:8000/api/users/', {
+    username: userUsername,
+    password: userPassword,
+    is_active: true,
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });};
 
-        return response.data;
-      } catch (err){
-      }
-    };
-
-
-const handleSubmit = async (evt) => {
-    const details = {username: userUsername, password: userPassword};
-    var response = await myReq(details);
-      console.log(response);
-      console.log("SETTING USER STATE ZTO LOGGED IN");
-      setUserIDToken(response.token);
-      setUserToken(response.user);
-  };
-
-
-  return <form onSubmit={handleSubmit} action='#'><label>
-      Username:
-      <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
-     </label>
-     <label>
-       Password:
-       <input type="text" value={userPassword} onChange={e => setUserPassword(e.target.value)} />
-     </label><input type="submit" value="Submit"></input>
-     </form>
+  return (
+    <div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Username:
+        <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
+      </label>
+      <label>
+        Password:
+        <input type="text" value={userPassword} onChange={e => setUserPassword(e.target.value)} />
+      </label>
+      <input type="submit" value="Register" />
+    </form>
+    </div>
+  );
 
 
 }
