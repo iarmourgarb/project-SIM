@@ -28,7 +28,11 @@ function App() {
         </div>
 
           :
-           <LogIn setUserState={setUserState}/>
+          <div>
+             <LogIn setUserState={setUserState}/>
+              <NewUser/>
+          </div>
+
 
     }
 
