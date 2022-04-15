@@ -64,7 +64,7 @@ import React, { useEffect, useState, useCookie} from "react";
             <p>Loading...</p>
         ) : (
             <div>
-                <table border="1" class = form-box>
+                <table border="1" class = "form-box">
                   <thead><tr><th>Song</th><th>Artist</th><th>Rating</th></tr></thead>
                   <tbody>
                  {data ? (data.map(el =>

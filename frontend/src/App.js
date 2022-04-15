@@ -32,9 +32,12 @@ function App() {
 
           :
           <div>
+          <h1> Song Rater </h1>
           <br></br><br></br><br></br>
+          <h2> Login to an existing account: </h2>
              <LogIn setUserState={setUserState}/>
           <br></br><br></br><br></br>
+              <h2> Create a new account:</h2>
               <NewUser/>
           </div>
 

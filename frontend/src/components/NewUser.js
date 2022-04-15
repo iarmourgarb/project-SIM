@@ -29,7 +29,7 @@ const handleSubmit = (formData) => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit} class = form-box>
+    <form onSubmit={handleSubmit} class="form-box">
       <label>
         Username:
         <input type="text" value={userUsername} onChange={e => setUserUsername(e.target.value)}/>
