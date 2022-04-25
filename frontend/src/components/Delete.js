@@ -11,9 +11,9 @@ function DeleteButton(props) {
         // className="button"
         onClick={(e) => {
           e.preventDefault();
-          const req =  axios.delete("http://localhost:8000/api/artists/" + props.deleting + "/", {}, {
+          const req =  axios.delete("http://127.0.0.1:8000/api/artists/" + props.deleting + "/", {
   headers: {
-  Authorization: 'token ' + getCookie('token')
+  Authorization: 'Token ' + getCookie('token')
   }
 })
           .then(function(response){window.location.reload(false)
