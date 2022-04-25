@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 /__ frontend/src/index.css  __/
 
   body {
-=======
-body {
->>>>>>> 5b981aca04ddfa850678d15519e09e97e55d6598
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -12,11 +8,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-<<<<<<< HEAD
-    background-color: #282c34;
-=======
     background-color: white;
->>>>>>> 5b981aca04ddfa850678d15519e09e97e55d6598
   }
   button {
     margin: 5px;

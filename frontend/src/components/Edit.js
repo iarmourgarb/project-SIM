@@ -27,27 +27,14 @@ export default function Edit(props) {
   const [rating, setRating] = useState(0)
   // const [songrating, setsongRating] = useState(0)
   const handleSubmit2 = (formData) => {
-  const req =  axios.post("http://localhost:8000/api/ratings/find/", {
+  const req =  axios.put("http://localhost:8000/api/ratings/", {
     user : getCookie("user"),
-    song_id : props.song.id
+    song_id : props.song.id,
+    rating: rating
   },{
       headers: {
         Authorization: 'token ' + getCookie('token')
-      }})
-
-  .then(async function(response){
-    console.log(response)
-    console.log(response.data.id)
-    console.log("kjfgkjfgnkjfg")
-    const req2 = await axios.put("http://localhost:8000/api/ratings/", {
-    id:response.data.id,
-    rating:rating,
-    user:getCookie("user")
-
-  },{
-      headers: {
-        Authorization: 'token ' + getCookie('token')
-      }})}) ;};
+      }})};
 
   return (
     <div>

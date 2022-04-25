@@ -32,7 +32,7 @@ class UserView(viewsets.ModelViewSet):
 class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
 
     @action(detail=False, methods=['post', 'get'])
     def post(self, request):
@@ -65,25 +65,29 @@ class RatingView(viewsets.ModelViewSet):
         else:
             return Response({'status': 'working'})
 
-    @action(detail=False, methods=['post'])
-    def find(self, request):
-        user = request.data['user']
-        song = request.data['song_id']
-        ratings = Rating.objects.filter(user=user, song_id=song)
-        if ratings:
-            rating = ratings[0]
-            id = rating.id
-            rate = rating.rating
-            return Response({'status': 'Rating found', 'id': id, 'rating': rate})
-        else:
-            return Response({'status': 'No rating exists'})
+    # @action(detail=False, methods=['post'])
+    # def find(self, request):
+    #     user = request.data['user']
+    #     song = request.data['song_id']
+    #     ratings = Rating.objects.filter(user=user, song_id=song)
+    #     if ratings:
+    #         rating = ratings[0]
+    #         id = rating.id
+    #         rate = rating.rating
+    #         return Response({'status': 'Rating found', 'id': id, 'rating': rate})
+    #     else:
+    #         return Response({'status': 'No rating exists'})
 
     def put(self, request):
-        id = request.data['id']
+        user = request.data['user']
+        song = request.data['song_id']
         rating = request.data['rating']
-        obj = Rating.objects.filter(id=id)[0]
-        obj.rating = rating
-        obj.save()
+        ratings = Rating.objects.filter(user=user, song_id=song)
+        if not ratings:
+            return Response({'status': 'No rating exists'})
+        r = ratings[0]
+        r.rating = rating
+        r.save()
         return Response({'status': "Rating updated"})
 
 
@@ -91,7 +95,7 @@ class RatingView(viewsets.ModelViewSet):
 class ArtistView(viewsets.ModelViewSet):
     serializer_class = ArtistSerializer
     queryset = Artist.objects.all()
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
     def put(self, request):

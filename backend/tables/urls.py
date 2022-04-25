@@ -22,12 +22,12 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 
 router = routers.DefaultRouter()
-router.register(r'artists', views.ArtistView, 'artist')
-router.register(r'users', views.UserView, 'user')
-router.register(r'ratings', views.RatingView, 'rating')
+router.register(r'artists', views.ArtistView, 'Artist')
+router.register(r'users', views.UserView, 'User')
+router.register(r'ratings', views.RatingView, 'Rating')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-        path('api/auth/', CustomAuthToken.as_view())
+    path('api/auth/', CustomAuthToken.as_view())
 ]
